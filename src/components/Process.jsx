@@ -6,7 +6,7 @@ const Process = (props) => {
     let val = e.target.value;
     props.process[i] = "p" + i;
     props.bt[i] = val;
-    console.log(props.bt, props.process);
+    // console.log(props.bt, props.process);
   };
 
   return (
@@ -15,7 +15,6 @@ const Process = (props) => {
       <input
         type="number"
         name={props.id}
-        // value={props.bt[props.id]}
         onChange={(e) => {
           handleChange(e);
         }}
