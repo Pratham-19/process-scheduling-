@@ -25,7 +25,7 @@ const App = () => {
           <h1 className="text-lg my-3">Number of processes: {inputProcess}</h1>
         )}
       </section>
-      <Processes inputProcess={inputProcess} />
+      {inputProcess > 0 && <Processes inputProcess={inputProcess} />}
     </div>
   );
 };

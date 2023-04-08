@@ -5,7 +5,6 @@ import Calculation from "./Calculation";
 const Processes = (props) => {
   let process = [];
   let burst_time = [];
-  const [timeQuantum, setTimeQuantum] = useState(0);
   const [show, setShow] = useState(false);
   const [data, setData] = useState({});
   for (let i = 0; i < props.inputProcess; i++) {
@@ -14,24 +13,11 @@ const Processes = (props) => {
   }
   const handleSubmit = async () => {
     await axios
-      .post("http://localhost:3050/process/time-quantum", {
-        burstTime: burst_time,
-      })
-      .then((response) => {
-        // console.log(response.data);
-        setTimeQuantum(response.data.timeQuantum);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    await axios
       .post("http://localhost:3050/process/calculation-arrival-same", {
         processes: process,
         burstTime: burst_time,
-        timeQuantum: timeQuantum,
       })
       .then((response) => {
-        // console.log(response.data);
         setData(response.data);
         setShow(true);
       })
@@ -42,10 +28,9 @@ const Processes = (props) => {
   };
   return (
     <div className="flex flex-col ">
-      <div className="flex text-2xl justify-center">
-        <h2 className="m-2">Process</h2>
-        {/* <h2 className="m-2  ml-6">Arrival Time</h2> */}
-        <h2 className="m-2 ml-5">Burst Time</h2>
+      <div className="flex text-xl min-w-fit mx-auto w-[24vw] ">
+        <h2 className="my-2 mx-1 ">Process</h2>
+        <h2 className="m-2">Burst Time (ms)</h2>
       </div>
       {process.map((p) => (
         <Process key={p} id={p} bt={burst_time} process={process} />
@@ -57,12 +42,7 @@ const Processes = (props) => {
         Submit
       </button>
       {show && (
-        <Calculation
-          timeQuantum={timeQuantum}
-          data={data}
-          processList={process}
-          burstTime={burst_time}
-        />
+        <Calculation data={data} processList={process} burstTime={burst_time} />
       )}
     </div>
   );
