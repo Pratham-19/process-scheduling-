@@ -13,7 +13,7 @@ const Processes = (props) => {
   }
   const handleSubmit = async () => {
     await axios
-      .post("http://localhost:3050/process/calculation-arrival-same", {
+      .post("https://scheduling-backend.onrender.com/process/calculation-arrival-same", {
         processes: process,
         burstTime: burst_time,
       })
